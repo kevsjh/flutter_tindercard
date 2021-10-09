@@ -48,6 +48,7 @@ class TinderSwapCard extends StatefulWidget {
   /// value of alignment, 0.0 means middle, so it need bigger than zero.
   /// and size control params;
   TinderSwapCard({
+    Key? key,
     required CardBuilder cardBuilder,
     required int totalNum,
     AmassOrientation orientation = AmassOrientation.bottom,
@@ -59,8 +60,8 @@ class TinderSwapCard extends StatefulWidget {
     bool swipeDown = false,
     double? maxWidth,
     double? maxHeight,
-    double? minWidth,
-    double? minHeight,
+    required double minWidth,
+    required double minHeight,
     bool allowVerticalMovement = true,
     this.cardController,
     this.swipeCompleteCallback,
@@ -68,7 +69,7 @@ class TinderSwapCard extends StatefulWidget {
   })  : assert(stackNum > 1),
         assert(swipeEdge > 0),
         assert(swipeEdgeVertical > 0),
-        assert(maxWidth! > minWidth! && maxHeight! > minHeight!),
+        assert(maxWidth! > minWidth && maxHeight! > minHeight),
         _cardBuilder = cardBuilder,
         _totalNum = totalNum,
         _stackNum = stackNum,
@@ -77,9 +78,10 @@ class TinderSwapCard extends StatefulWidget {
         _swipeEdgeVertical = swipeEdgeVertical,
         _swipeUp = swipeUp,
         _swipeDown = swipeDown,
-        _allowVerticalMovement = allowVerticalMovement {
-    final widthGap = maxWidth! - minWidth!;
-    final heightGap = maxHeight! - minHeight!;
+        _allowVerticalMovement = allowVerticalMovement,
+        super(key: key) {
+    final widthGap = maxWidth! - minWidth;
+    final heightGap = maxHeight! - minHeight;
 
     for (var i = 0; i < _stackNum; i++) {
       _cardSizes.add(
@@ -127,11 +129,11 @@ class TinderSwapCard extends StatefulWidget {
 
 class _TinderSwapCardState extends State<TinderSwapCard>
     with TickerProviderStateMixin {
-   late Alignment frontCardAlign;
+  late Alignment frontCardAlign;
 
-   late AnimationController _animationController;
+  late AnimationController _animationController;
 
-   late int _currentFront;
+  late int _currentFront;
 
   static TriggerDirection? _trigger;
 
