@@ -58,8 +58,8 @@ class TinderSwapCard extends StatefulWidget {
     double swipeEdgeVertical = 8.0,
     bool swipeUp = false,
     bool swipeDown = false,
-    double? maxWidth,
-    double? maxHeight,
+    required double maxWidth,
+    required double maxHeight,
     required double minWidth,
     required double minHeight,
     bool allowVerticalMovement = true,
@@ -69,7 +69,7 @@ class TinderSwapCard extends StatefulWidget {
   })  : assert(stackNum > 1),
         assert(swipeEdge > 0),
         assert(swipeEdgeVertical > 0),
-        assert(maxWidth! > minWidth && maxHeight! > minHeight),
+        assert(maxWidth > minWidth && maxHeight > minHeight),
         _cardBuilder = cardBuilder,
         _totalNum = totalNum,
         _stackNum = stackNum,
@@ -80,8 +80,8 @@ class TinderSwapCard extends StatefulWidget {
         _swipeDown = swipeDown,
         _allowVerticalMovement = allowVerticalMovement,
         super(key: key) {
-    final widthGap = maxWidth! - minWidth;
-    final heightGap = maxHeight! - minHeight;
+    final widthGap = maxWidth - minWidth;
+    final heightGap = maxHeight - minHeight;
 
     for (var i = 0; i < _stackNum; i++) {
       _cardSizes.add(
