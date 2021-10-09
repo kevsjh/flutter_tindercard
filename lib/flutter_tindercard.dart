@@ -16,6 +16,8 @@ class TinderSwapCard extends StatefulWidget {
 
   final int _animDuration;
 
+  final double _dyAlignment;
+
   final double _swipeEdge;
 
   final double _swipeEdgeVertical;
@@ -54,6 +56,7 @@ class TinderSwapCard extends StatefulWidget {
     AmassOrientation orientation = AmassOrientation.bottom,
     int stackNum = 3,
     int animDuration = 800,
+    double dyAlignment = 0.5,
     double swipeEdge = 3.0,
     double swipeEdgeVertical = 8.0,
     bool swipeUp = false,
@@ -70,6 +73,7 @@ class TinderSwapCard extends StatefulWidget {
         assert(swipeEdge > 0),
         assert(swipeEdgeVertical > 0),
         assert(maxWidth > minWidth && maxHeight > minHeight),
+        _dyAlignment = dyAlignment,
         _cardBuilder = cardBuilder,
         _totalNum = totalNum,
         _stackNum = stackNum,
@@ -94,7 +98,7 @@ class TinderSwapCard extends StatefulWidget {
           _cardAligns.add(
             Alignment(
               0.0,
-              (0.5 / (_stackNum - 1)) * (stackNum - i),
+              (_dyAlignment / (_stackNum - 1)) * (stackNum - i),
             ),
           );
           break;
@@ -102,7 +106,7 @@ class TinderSwapCard extends StatefulWidget {
           _cardAligns.add(
             Alignment(
               0.0,
-              (-0.5 / (_stackNum - 1)) * (stackNum - i),
+              (-_dyAlignment / (_stackNum - 1)) * (stackNum - i),
             ),
           );
           break;
